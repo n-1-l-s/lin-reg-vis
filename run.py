@@ -38,5 +38,16 @@ if num_features == 1:
     plt.scatter(X[:,0], y)
     st.pyplot(fig)
 
+for i in range(num_features):
+    fig2 = plt.figure()
+    plt.title("omega-%i" %(i))
+    plt.xlabel("")
+    plt.ylabel("MSE - MSE_best")
+    plt.xlabel("omega - omega_best")
+    xx = np.linspace(-3 * coef[i], 3 * coef[i], 100)
+    yy = np.array([mean_squared_error(y, np.matmul(X, np.hstack([coef[:i], [a+coef[i]],  coef[i+1:]]).T) + intercept) for a in xx]) - mse
+    plt.plot(xx, yy)
+    st.pyplot(fig2)
+
 st.write("MSE Violet: ", mse)
 st.write("MSE Green: ", mse_new)
